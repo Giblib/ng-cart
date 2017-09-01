@@ -83,6 +83,10 @@ angular.module('ngCart', ['ngCart.directives'])
             return  this.getCart().discount;
         };
 
+        this.removeDiscount = function(){
+            this.$cart.discount = null;
+        };
+
         this.setShipping = function(shipping){
             this.$cart.shipping = shipping;
             return this.getShipping();

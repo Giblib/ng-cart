@@ -31,6 +31,13 @@
             <td>Shipping:</td>
             <td>{{ ngCart.getShipping() | currency }}</td>
         </tr>
+        <tr ng-show="ngCart.getDiscount()">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Discount:</td>
+            <td>{{ ngCart.getDiscount() | currency }}</td>
+        </tr>
         <tr>
             <td></td>
             <td></td>

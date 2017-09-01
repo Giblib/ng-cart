@@ -34,6 +34,7 @@ angular.module('ngCart', ['ngCart.directives'])
                 shipping : null,
                 taxRate : null,
                 tax : null,
+                discount: null,
                 items : []
             };
         };
@@ -65,6 +66,25 @@ angular.module('ngCart', ['ngCart.directives'])
                 }
             });
             return build;
+        };
+
+        this.setDiscount = function(amount){
+            if (!this.$cart.discount) {
+                this.$cart.discount = amount;
+            } else {
+                this.$cart.discount += amount;
+            }
+
+            return this.getDiscount();
+        };
+
+        this.getDiscount = function(){
+            if (this.getCart().items.length == 0) return 0;
+            return  this.getCart().discount;
+        };
+
+        this.removeDiscount = function(){
+            this.$cart.discount = null;
         };
 
         this.setShipping = function(shipping){
@@ -125,7 +145,7 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
         this.totalCost = function () {
-            return +parseFloat(this.getSubTotal() + this.getShipping() + this.getTax()).toFixed(2);
+            return +parseFloat(this.getSubTotal() - this.getDiscount() + this.getShipping() + this.getTax()).toFixed(2);
         };
 
         this.removeItem = function (index) {
